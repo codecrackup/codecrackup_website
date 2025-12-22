@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>CodeCrackUp</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static',filename='img/favicon.png')}}" rel="icon">
+  <!--<link href="{{ url_for('static',filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon"> -->
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static',filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static',filename='css/main.css')}}" rel="stylesheet">
+
+    
+
+
+
+
+</head>
+
+
+
+
+
+<body class="index-page">
+
+  <header id="header" class="header dark-background d-flex flex-column">
+    <i class="header-toggle d-xl-none bi bi-list"></i>
+
+    <div class="profile-img">
+      <img src="{{ url_for('static',filename='img/CodeCrackUp.png')}}" alt="" class="img-fluid rounded-circle">
+    </div>
+
+    <a href="/" class="logo d-flex align-items-center justify-content-center">
+      <!-- Uncomment the line below if you also wish to use an image logo -->
+      <!-- <img src="img/logo.png" alt=""> -->
+      <h1 class="sitename">CodeCrackUp</h1>
+    </a>
+
+    <div class="social-links text-center">
+      <!-- <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a> -->
+      <!-- <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> -->
+      <a href="https://www.instagram.com/codecrackup/" target="_blank" class="instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://github.com/codecrackup" target="_blank" class="github"><i class="bi bi-github"></i></a>
+      <a href="mailto:codecrackup@gmail.com" target="_blank" class="Gmail"><i class="bi bi-envelope"></i></a>
+    </div>
+
+    <nav id="navmenu" class="navmenu">
+      <ul>
+       
+        <li><a href="/admin"><i class="bi bi-person navicon"></i> Admin Panel</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+   
+    <!-- Codes Section -->
+    <section id="resume" class="resume section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        
+        
+      </div><!-- End Section Title -->
+
+      <div class="container">
+        <div class="post">
+            <style>
+                 h1 {
+                font-size: 52px;
+                font-weight: 600;
+                margin-top: -6.5%;
+                padding-bottom: 20px;
+                position: relative;
+                text-align: center;
+            }
+                button{
+                    background-color: #040b14;
+                    color: white;
+                    width: 60px;
+                    height: 30px;
+                    border: 0;
+                    border-color: #040b14;
+                    margin-top: -5px;
+                    border-radius: 15px;
+                    text-size-adjust: 10px;
+                    font-size: 15px;
+                    padding: auto;
+                    transition: 0.4s;
+                    font-weight: 450;
+
+
+                }
+                button:hover {
+                    background-color: white;
+                    color: #040b14;
+                    font-weight: 1000;
+                    
+                    
+                }
+
+                .mb-3 input{
+                  border: 0.75px solid;
+                }
+
+                .mb-3 textarea{
+                  border: 0.75px solid;
+                  height: 12cm;
+                }
+
+                .php-email-form button{
+                  width: 240px;
+                  height: 40px;
+                  font-size: 20px;
+                  text-align: center;
+                  margin-left: 500px;
+                }
+
+                
+                
+
+            </style>
+          <h1>ADD/EDIT YOUR CODE</h1>
+          <form action="/edit/{{sno}}" method="post">
+            <div class="mb-3">
+              <label for="box_title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="box_title" aria-describedby="emailHelp" name="box_title" value="{{code.title}}">
+            </div>
+            <div class="mb-3">
+              <label for="box_content" class="form-label">Content</label>
+              <textarea  class="form-control" id="box_content" name="box_content">{{code.content}}</textarea>
+            </div>
+            <div class="mb-3">
+              <label for="box_slug" class="form-label">Slug</label>
+              <input type="text" class="form-control" id="box_slug" aria-describedby="emailHelp" name="box_slug" value="{{code.slug}}">
+            </div>
+            <div class="mb-3">
+              <label for="box_img_file" class="form-label">Image-file</label>
+              <input type="text" class="form-control" id="box_img_file" aria-describedby="emailHelp" name="box_img_file" value="{{code.img_file}}">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          
+
+          
+        </div>
+    <br>
+    <br>
+       
+
+      
+
+    </section><!-- /Codes Section  -->
+
+
+    
+
+    
+
+  </main>
+
+ 
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/php-email-form/validate.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/aos/aos.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/typed.js/typed.umd.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/purecounter/purecounter_vanilla.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/waypoints/noframework.waypoints.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+  <script src="{{ url_for('static',filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
+
+  <!-- Main JS File -->
+  <script src="{{ url_for('static',filename='js/main.js')}}"></script>
+
+</body>
+
+</html>
