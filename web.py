@@ -6,28 +6,32 @@ from flask_mail import Mail
 import math
 import smtplib
 from email.message import EmailMessage
+import os
+
+params={
+        "admin_user": os.getenv("ADMIN_USER"),
+        "admin_pass": os.getenv("ADMIN_PASS"),
+        "no_of_posts": os.getenv("NO_OF_POSTS",3),
+
+}
 
 
-with open("config.json",'r') as file:
-    params= json.load(file)["params"]
 app = Flask(__name__)
 app.secret_key='hello'
 app.config.update(
-    MAIL_SERVER='smtp.google.com',
-    MAIL_PORT='465',
-    MAIL_USE_SSL= False,
-    MAIL_USERNAME=params['gmail_user'],
-    MAIL_PASSWORD=params['gmail_pass']
-
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=465,
+    MAIL_USE_SSL=True,
+    MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
+    MAIL_PASSWORD=os.getenv("MAIL_PASSWORD")
 )
 
-mail=Mail(app)
-local_server=True
 
-if (local_server):
-    app.config["SQLALCHEMY_DATABASE_URI"] = params['local_uri']
-else:
-    app.config["SQLALCHEMY_DATABASE_URI"] = params['prod_uri']
+mail=Mail(app)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 
 db=SQLAlchemy(app)
 
@@ -160,7 +164,11 @@ def contact():
 
         # Connect to Gmail's SMTP server
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login('sonardarshan508@gmail.com', 'tayg lnjd zjuj qrcp')
+            smtp.login(
+    os.getenv("MAIL_USERNAME"),
+    os.getenv("MAIL_PASSWORD")
+)
+
             smtp.send_message(msg)
 
         print("Email sent!")
@@ -182,7 +190,6 @@ def delete(sno):
 
 
 
-app.run(host='0.0.0.0', port=5000,debug=True)
 
 
 
