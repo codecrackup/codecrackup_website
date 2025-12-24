@@ -18,13 +18,10 @@ params={
 
 }
 app = Flask(__name__)
-db=SQLAlchemy(app)
+
 mail=Mail(app)
 
-with app.app_context():
-    inspector = inspect(db.engine)
-    if not inspector.has_table("codes"):
-        db.create_all()
+
 
 
 
@@ -39,13 +36,9 @@ app.config.update(
 )
 
 
-def ensure_tables():
-    with app.app_context():
-        inspector = inspect(db.engine)
-        if not inspector.has_table("codes"):
-            db.create_all()
 
-ensure_tables()
+
+
 
 
 
@@ -66,8 +59,18 @@ app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
+db=SQLAlchemy(app)
+with app.app_context():
+    inspector = inspect(db.engine)
+    if not inspector.has_table("codes"):
+        db.create_all()
 
-
+def ensure_tables():
+    with app.app_context():
+        inspector = inspect(db.engine)
+        if not inspector.has_table("codes"):
+            db.create_all()
+ensure_tables()
 
 class Contacts(db.Model):
     sno=db.Column(db.Integer,primary_key=True)
@@ -231,6 +234,7 @@ if __name__ == "__main__":
 
 
  
+
 
 
 
