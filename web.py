@@ -9,6 +9,8 @@ from email.message import EmailMessage
 import os
 from sqlalchemy import inspect
 
+
+
 params={
         "admin_user": os.getenv("ADMIN_USER"),
         "admin_pass": os.getenv("ADMIN_PASS"),
@@ -37,15 +39,24 @@ app.config.update(
 )
 
 
+def ensure_tables():
+    with app.app_context():
+        inspector = inspect(db.engine)
+        if not inspector.has_table("codes"):
+            db.create_all()
+
+ensure_tables()
 
 
 
+import os
 
 db_url = os.getenv("DATABASE_URL")
 
 if not db_url:
-    raise RuntimeError("DATABASE_URL is not set")
+    raise RuntimeError("DATABASE_URL is not set. Check Render environment variables.")
 
+# psycopg3 compatibility
 if db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql+psycopg://", 1)
 elif db_url.startswith("postgresql://"):
@@ -53,6 +64,7 @@ elif db_url.startswith("postgresql://"):
 
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 
 
 
@@ -219,6 +231,7 @@ if __name__ == "__main__":
 
 
  
+
 
 
 
