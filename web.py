@@ -29,8 +29,16 @@ app.config.update(
 
 mail=Mail(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+
+
+db_url = os.getenv("DATABASE_URL")
+
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 
 
 db=SQLAlchemy(app)
@@ -198,4 +206,5 @@ if __name__ == "__main__":
 
 
  
+
 
