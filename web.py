@@ -15,7 +15,7 @@ params={
         "no_of_posts": os.getenv("NO_OF_POSTS",3),
 
 }
-
+app = Flask(__name__)
 
 
 with app.app_context():
@@ -25,7 +25,7 @@ with app.app_context():
 
 
 
-app = Flask(__name__)
+
 app.secret_key='hello'
 app.config.update(
     MAIL_SERVER='smtp.gmail.com',
@@ -218,6 +218,7 @@ if __name__ == "__main__":
 
 
  
+
 
 
 
