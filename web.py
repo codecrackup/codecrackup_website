@@ -16,7 +16,8 @@ params={
 
 }
 app = Flask(__name__)
-
+db=SQLAlchemy(app)
+mail=Mail(app)
 
 with app.app_context():
     inspector = inspect(db.engine)
@@ -36,7 +37,7 @@ app.config.update(
 )
 
 
-mail=Mail(app)
+
 
 
 
@@ -53,7 +54,7 @@ elif db_url.startswith("postgresql://"):
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-db=SQLAlchemy(app)
+
 
 
 class Contacts(db.Model):
@@ -218,6 +219,7 @@ if __name__ == "__main__":
 
 
  
+
 
 
 
