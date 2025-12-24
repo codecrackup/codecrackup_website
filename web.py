@@ -33,13 +33,16 @@ mail=Mail(app)
 
 db_url = os.getenv("DATABASE_URL")
 
-if db_url and db_url.startswith("postgres://"):
-    db_url = db_url.replace("postgres://", "postgresql://", 1)
+if not db_url:
+    raise RuntimeError("DATABASE_URL is not set")
+
+if db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql+psycopg://", 1)
+elif db_url.startswith("postgresql://"):
+    db_url = db_url.replace("postgresql://", "postgresql+psycopg://", 1)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-
 
 db=SQLAlchemy(app)
 
@@ -206,5 +209,6 @@ if __name__ == "__main__":
 
 
  
+
 
 
