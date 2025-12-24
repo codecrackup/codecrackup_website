@@ -7,6 +7,7 @@ import math
 import smtplib
 from email.message import EmailMessage
 import os
+from sqlalchemy import inspect
 
 params={
         "admin_user": os.getenv("ADMIN_USER"),
@@ -14,6 +15,14 @@ params={
         "no_of_posts": os.getenv("NO_OF_POSTS",3),
 
 }
+
+
+
+with app.app_context():
+    inspector = inspect(db.engine)
+    if not inspector.has_table("codes"):
+        db.create_all()
+
 
 
 app = Flask(__name__)
@@ -209,6 +218,7 @@ if __name__ == "__main__":
 
 
  
+
 
 
 
