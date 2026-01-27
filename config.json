@@ -1,16 +1,1 @@
-{
-    "params":
-    {
-        "local_server":"True",
-        "local_uri":"mysql://root:@localhost/CodeCrackUp",
-        "prod_uri":"mysql://root:@localhost/CodeCrackUp",
-        "gmail_user":"codecrackup@gmail.com",
-        "gmail_pass":"darshan01127",
-        "blog_name":"CodeCrackUp",
-        "admin_user":"Darshan_sonar27",
-        "admin_pass":"QJCCGJCBQTGBM@1427",
-        
-    }
-}
-
 
